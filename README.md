@@ -1,12 +1,12 @@
 # faceBlur
 Detects and blurs any faces in a given image.
 
-##Dependences 
+## Dependences 
 - Numpy
 - Python3
 - OpenCV
 
-##ToDo
+## ToDo
 - [x] Add in Face Detection.
 - [x] Add in a Blur Filter.
 - [ ] Add in video support.
