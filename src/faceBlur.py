@@ -20,24 +20,18 @@ h, w = img.shape[:2]
 #detect faces 
 faces = face_cascade.detectMultiScale(gray,scaleFactor=1.2,minNeighbors=5,minSize=(40,40),maxSize=(60,60))
 
-print(len(faces))
-print(faces)
-
-
-#draw faces on the source image
 for (x,y,w,h) in faces:
+  cropped = img[y:y+h, x:w+w]
+  cropped = cv2.GaussianBlur(cropped,(23,23),30)
   
-  h1 = h
-  w1 = w
-   
-  cropped = img[x:x+w,y:y+h]
-  #overlay = cv2.addWeighted(img, 1, cropped, 1, 0)
   cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
+  print(cropped.shape[0])
+  l_img = img
+  s_img = cropped
+  y_offset = y
+  x_offset = x
+  l_img[y_offset:y_offset+s_img.shape[0], x_offset:x_offset+s_img.shape[1]] = s_img
 
-#output image
-
-
-cv2.imshow("gray",cropped)
-
+cv2.imshow("result",img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
