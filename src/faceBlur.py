@@ -1,35 +1,28 @@
 import cv2
-import matplotlib.pyplot as plt
 import dlib
-import numpy as np
-from imutils import face_utils
-import matplotlib.image as mpimg
-font = cv2.FONT_HERSHEY_SIMPLEX
 
-img_path = '/home/avrha/Desktop/faceBlur/pics/group1.jpg'
+#Load in and convert source image to into grayscale
+img = cv2.imread('/home/avrha/Desktop/faceBlur/pics/group2.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-source = mpimg.imread(img_path)
-blurred = source.copy()
+#Detect faces using CNN model
+cnnFaceDetector = dlib.cnn_face_detection_model_v1('/home/avrha/Desktop/faceBlur/model/mmod_human_face_detector.dat')
+faces = cnnFaceDetector(gray,1)
+print(faces)
 
-gray =  cv2.cvtColor(source, cv2.COLOR_BGR2GRAY)
-img = np.float32(gray) / 32
+#Blur faces
+for faceRect in faces:
+  rect = faceRect.rect
+  x = rect.left()
+  y = rect.top()
+  w = rect.right() - x
+  h = rect.bottom() - y
 
-#Calculate gradient
-gx = cv2.Sobel(img, cv2.CV_32F, 1, 0, ksize=1)
-gy = cv2.Sobel(img, cv2.CV_32F, 0, 1, ksize=1)
-mag, angle = cv2.cartToPolar(gx,gy, angleInDegrees=True)
-
-face_detect = dlib.get_frontal_face_detector()
-
-rects = face_detect(gray,1)
-
-for (i,rect) in enumerate(rects):
-  (x, y, w, h) = face_utils.rect_to_bb(rect)
-  box = source[y:y+h, x:x+w]
+  box = img[y:y+h,x:x+w]
   box = cv2.GaussianBlur(box,(23,23),30)
+  img[y:y+box.shape[0], x:x+box.shape[1]] = box 
 
-  blurred[y:y+box.shape[0], x:x+box.shape[1]] = box
-
-plt.figure(figsize=(12,8))
-plt.imshow(blurred)
-plt.show()
+#Display image with blur
+cv2.imshow("Image",img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
