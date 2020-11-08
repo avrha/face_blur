@@ -2,13 +2,12 @@ import cv2
 import dlib
 
 #Load in and convert source image to into grayscale
-img = cv2.imread('/home/avrha/Desktop/faceBlur/pics/group2.jpg')
+img = cv2.imread('../pics/group3.jpg', 1)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 #Detect faces using CNN model
-cnnFaceDetector = dlib.cnn_face_detection_model_v1('/home/avrha/Desktop/faceBlur/model/mmod_human_face_detector.dat')
+cnnFaceDetector = dlib.cnn_face_detection_model_v1('../model/mmod_human_face_detector.dat')
 faces = cnnFaceDetector(gray,1)
-print(faces)
 
 #Blur faces
 for faceRect in faces:
