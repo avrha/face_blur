@@ -2,7 +2,7 @@ import cv2
 import dlib
 
 #Load in and convert source image to into grayscale
-img = cv2.imread('../pics/group2.jpg',1)
+img = cv2.imread('../media/group-pic.jpg',1)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 #Detect faces using CNN model
