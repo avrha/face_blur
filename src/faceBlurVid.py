@@ -2,7 +2,7 @@ import cv2
 import dlib
 from imutils import face_utils
 
-cap = cv2.VideoCapture('../media/group-vid.mp4')
+cap = cv2.VideoCapture('../media/groupVid.mp4')
 face_detect = dlib.get_frontal_face_detector()
 
 if(cap.isOpened() == 0):
