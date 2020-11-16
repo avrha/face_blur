@@ -1,27 +1,27 @@
 import cv2
+from functions import faceBlur
 import dlib
 
-#Load in and convert source image to into grayscale
-img = cv2.imread('../media/groupPic.jpg',1)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+def main():
+  #Load in and convert source image to into grayscale
+  img = cv2.imread('../media/groupPic.jpg',1)
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  frameCount = 0
+  faceCount = 0
+  
+  #Detect faces using CNN model
+  cnnFaceDetector = dlib.cnn_face_detection_model_v1('../model/mmod_human_face_detector.dat')
+  faces = cnnFaceDetector(gray,1)
+  
+  #Blur faces
+  faceBlur(img,faces,frameCount,faceCount)
 
-#Detect faces using CNN model
-cnnFaceDetector = dlib.cnn_face_detection_model_v1('../model/mmod_human_face_detector.dat')
-faces = cnnFaceDetector(gray,1)
+  #Display image with blur
+  cv2.imshow("Image",img)
+  cv2.waitKey(0)
+  cv2.destroyAllWindows()
 
-#Blur faces
-for faceRect in faces:
-  rect = faceRect.rect
-  x = rect.left()
-  y = rect.top()
-  w = rect.right() - x
-  h = rect.bottom() - y
+  return 0
 
-  box = img[y:y+h,x:x+w]
-  box = cv2.GaussianBlur(box,(23,23),30)
-  img[y:y+box.shape[0], x:x+box.shape[1]] = box 
-
-#Display image with blur
-cv2.imshow("Image",img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+  main()
