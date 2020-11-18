@@ -1,7 +1,8 @@
 import cv2
 
 
-def face_blur(frame, faces, frame_count, face_count):
+def face_blur(frame, faces):
+    face_count = 0
     for faceRect in faces:
         # retrieve dimensions on detected face
         rect = faceRect.rect
@@ -18,10 +19,9 @@ def face_blur(frame, faces, frame_count, face_count):
         face_count += 1
 
         if face_count == len(faces):
-            print("Frame:", frame_count, "Face:", face_count)
-            cv2.imshow('Video', frame)
+            print("Face:", face_count)
             print("----------------------")
 
         else:
-            print("Frame:", frame_count, "Face:", face_count)
+            print("Face:", face_count)
             cv2.imshow('Output', frame)
