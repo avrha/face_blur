@@ -6,8 +6,6 @@ def face_blur(frame, faces):
     face_count = 1
 
     for (i, faces) in enumerate(faces):
-        if:
-            
         # create object based on retrieved dimensions
         (x, y, w, h) = face_utils.rect_to_bb(faces)
         box = frame[y:y + h, x:x + w]
