@@ -14,5 +14,6 @@ Detects and blurs any faces in a given image.
 - [x] Add in video support.
 - [x] Reduce false positives and negatives.
 - [x] Add in HOG
-- [ ] Add in argument support
+- [x] Add in argument support
+- [ ] Modularize modules
 - [ ] Debug and test code
