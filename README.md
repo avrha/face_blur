@@ -8,10 +8,11 @@ Detects and blurs any faces in a given image.
 - imutils
 - numpy
 
-## ToDo
+## TODO 
 - [x] Add in Face Detection.
 - [x] Add in a Blur Filter.
 - [x] Add in video support.
 - [x] Reduce false positives and negatives.
 - [x] Add in HOG
 - [ ] Add in argument support
+- [ ] Debug and test code
