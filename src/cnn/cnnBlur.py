@@ -24,4 +24,4 @@ def face_blur(frame, faces, frame_count, face_count):
 
         else:
             print("Frame:", frame_count, "Face:", face_count)
-            cv2.imshow('Video', frame)
+            cv2.imshow('Output', frame)
