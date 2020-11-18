@@ -23,4 +23,4 @@ def face_blur(frame, faces):
         # output face coordinates
         print("Face:", face_count, faces)
         face_count += 1
-        cv2.imshow('Video', frame)
+        cv2.imshow('Output', frame)
