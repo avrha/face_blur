@@ -1,6 +1,6 @@
 import sys
 import cv2
-from cnnBlur import faceBlur
+from cnnBlur import face_blur
 import dlib
 
 
@@ -17,7 +17,7 @@ def main():
     faces = cnn_face_detector(gray, 1)
 
     # Blur faces
-    faceBlur(img, faces, frame_count, face_count)
+    face_blur(img, faces, frame_count, face_count)
 
     # Display image with blur
     cv2.waitKey(0)
