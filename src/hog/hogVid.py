@@ -1,11 +1,17 @@
 import cv2
 import dlib
 import numpy as np
+import argparse
 from hogBlur import face_blur
 
 
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--input", required=True, help="path to input file")
+ap.add_argument("-s", "--skip", type=int,default=1,help="skip value")
+args = vars(ap.parse_args())
+
 def main():
-    cap = cv2.VideoCapture('../../media/groupVid.mp4')
+    cap = cv2.VideoCapture(args["input"])
     face_detect = dlib.get_frontal_face_detector()
 
     if cap.isOpened() == 0:
@@ -21,7 +27,7 @@ def main():
         cv2.resize(gray, (0, 0), fx=0.25, fy=0.25)
 
         if ret == 1:
-            if cap.get(1) % 10 == 0:
+            if cap.get(1) % args["skip"] == 0:
                 print("---------------------------------------")
                 print("Frame:", cap.get(1))
                 faces = face_detect(gray, 1)
