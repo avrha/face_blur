@@ -1,0 +1,5 @@
+python3
+opencv-python
+dlib
+numpy
+cvlib
