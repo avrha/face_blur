@@ -5,8 +5,10 @@ import numpy as np
 from blur_filter import blur_cnn
 
 
+# add arguments 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--input", required=True, help="Path to image file")
+ap.add_argument("-o", "--output", required=True, help="Name of output file")
 args = vars(ap.parse_args())
 
 
@@ -29,6 +31,7 @@ def main():
 
   #Display image with blur
   cv2.imshow("Output",img)
+  cv2.imwrite(args["output"],img)
   cv2.waitKey(0)
   cv2.destroyAllWindows()
 
