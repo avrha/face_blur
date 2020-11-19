@@ -1,19 +1,16 @@
-# faceBlur
-Detects and blurs any faces in a given image.
+# face_blur
+Detects and blurs any faces in a given image or video.
 
-## Dependences 
+## Dependencies 
 - Python3
 - OpenCV
-- Dlib
-- imutils
+- dlib
 - numpy
+- cvlib
 
-## TODO 
-- [x] Add in Face Detection.
-- [x] Add in a Blur Filter.
-- [x] Add in video support.
-- [x] Reduce false positives and negatives.
-- [x] Add in HOG
-- [x] Add in argument support
-- [ ] Modularize modules
-- [ ] Debug and test code
+### Install Dependencies
+```
+pip3 install -r ./requirements.txt
+```
+
+## Instructions
