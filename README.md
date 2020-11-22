@@ -1,6 +1,6 @@
 # face_blur
 Detects and blurs any faces in a given image or video.
-<img width=800px src=example.jpg" />
+<img width=800px src="https://github.com/avrha/face_blur/blob/main/example.jpg/">
 ## Dependencies 
 - python3
 - openCV
