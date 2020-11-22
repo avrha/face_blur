@@ -2,10 +2,8 @@
 import sys
 import argparse
 import cv2
-import sys
 
-from src.image import image
-from src.video import video
+from src.face_detection import image, video
 
 # add arguments 
 ap = argparse.ArgumentParser()
