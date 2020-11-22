@@ -1,5 +1,4 @@
 #import modules
-import sys
 import argparse
 import cv2
 from src.face_detection import image, video
