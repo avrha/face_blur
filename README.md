@@ -26,3 +26,7 @@ python3 face_blur.py -i image.jpg -o image_blurred.jpg
 ``
 python3 face_blur.py -i video.mp4 -o video_blurred.mp4
 ``
+
+## TODO
+- [ ] GPU Support
+- [ ] Various Codec Support
