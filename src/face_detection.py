@@ -1,5 +1,6 @@
 import cv2
 import dlib
+import argparse
 import numpy as np
 import cvlib as cv
 from src.blur_filter import blur_cnn, blur_dnn
