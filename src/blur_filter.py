@@ -8,7 +8,14 @@ def blur_dnn(source, face):
                                                                           
     # create object based on retrieved dimensions
     box = source[startY:endY, startX:endX]
-    box = cv2.GaussianBlur(box,(99,99),30)
+
+    # Sloppy work around to assertion error, work on this later
+    try:
+      box = cv2.GaussianBlur(box,(99,99),30)
+    except:
+      break
+
+
     # overlay object on frame
     source[startY:startY + box.shape[0], startX:startX + box.shape[1]] = box 
 
