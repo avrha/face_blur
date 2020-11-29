@@ -2,26 +2,29 @@ import cv2
 from mtcnn import MTCNN
 from src.blur_filter import blur_mtcnn
 
+
 # Used for processing images
 def image(arg1,arg2):
   # Read in image
   img = cv2.imread(arg1,1)
 
-  # Ensure file is opened
+  # Check file is opened
   if img is None:
     print("Could not open file")
     exit()
 
-  # Use face detection
+  # Face detection
   detector = MTCNN()
   faces = detector.detect_faces(img)
   
   # Blur faces
-  blur_mtcnn(img,faces)
+  blurred_image = blur_mtcnn(img,faces)
 
-  # Display image with blur
-  cv2.imshow("Output",img)
-  cv2.imwrite(arg2,img)
+  # Display and write out image with blur
+  blurred_resized = cv2.resize(blurred_image,(0,0),fx=0.50,fy=0.50)
+  cv2.imshow("Image Output",blurred_resized)
+  cv2.imwrite(arg2,blurred_image)
+
   cv2.waitKey(0)
   cv2.destroyAllWindows()
 
@@ -38,6 +41,8 @@ def video(arg1,arg2):
   # Set dimensions for output file
   frame_width = int(cap.get(3))
   frame_height = int(cap.get(4))
+
+  # Output variable
   out = cv2.VideoWriter(arg2,cv2.VideoWriter_fourcc('M','J','P','G'),24,(frame_width,frame_height))
 
   while cap.isOpened():
@@ -52,12 +57,16 @@ def video(arg1,arg2):
       print("Error with frame")
       exit()
     
-    # Load DNN model and then detect face
+    # Face Detection
     detector = MTCNN()
     faces = detector.detect_faces(frame)
-    blur_mtcnn(frame,faces)
-    out.write(frame)
-    cv2.imshow("Real-time face detection", frame)
+    
+    # Blur faces in frame 
+    blurred_frame = blur_mtcnn(frame,faces)
+
+    # Show and write out frame
+    cv2.imshow("Video Output", blurred_frame)
+    out.write(blurred_frame)
 
     # Press q to exit video
     if cv2.waitKey(1) & 0xFF == ord('q'):
