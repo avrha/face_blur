@@ -15,7 +15,6 @@ def main():
     image(args["input"],args["output"])
   else:
     print("this is a video file")
-    video(args["input"],args["output"])
-    
+    video(args["input"],args["output"]) 
 if __name__ == "__main__":
   main()

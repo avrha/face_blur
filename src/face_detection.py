@@ -1,27 +1,23 @@
 import cv2
-import dlib
-import numpy as np
-import cvlib as cv
-from src.blur_filter import blur_cnn, blur_dnn
+from mtcnn import MTCNN
+from src.blur_filter import blur_mtcnn
 
 # Used for processing images
 def image(arg1,arg2):
-  # Load in and convert source image to into grayscale
+  # Read in image
   img = cv2.imread(arg1,1)
-  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-  cv2.resize(gray,(0,0),fx=0.25,fy=0.25)
 
-  # Ensure the file is opened
-  if np.shape(img) == ():
-    print("Error opening the image file")
+  # Ensure file is opened
+  if img is None:
+    print("Could not open file")
     exit()
 
-  # Detect faces using CNN model
-  face_detect = dlib.cnn_face_detection_model_v1('mmod_human_face_detector.dat') 
-  face = face_detect(gray,1)
-
+  # Use face detection
+  detector = MTCNN()
+  faces = detector.detect_faces(img)
+  
   # Blur faces
-  blur_cnn(img,face)
+  blur_mtcnn(img,faces)
 
   # Display image with blur
   cv2.imshow("Output",img)
@@ -39,7 +35,6 @@ def video(arg1,arg2):
     print("Could not open file")
     exit()
 
-
   # Set dimensions for output file
   frame_width = int(cap.get(3))
   frame_height = int(cap.get(4))
@@ -53,13 +48,14 @@ def video(arg1,arg2):
       print("Error with ret")
       exit()
     
-    if np.shape(frame) == ():
+    if frame is None:
       print("Error with frame")
       exit()
     
     # Load DNN model and then detect face
-    face, _ = cv.detect_face(frame)
-    blur_dnn(frame,face)
+    detector = MTCNN()
+    faces = detector.detect_faces(frame)
+    blur_mtcnn(frame,faces)
     out.write(frame)
     cv2.imshow("Real-time face detection", frame)
 
