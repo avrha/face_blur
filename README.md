@@ -26,5 +26,4 @@ python3 face_blur.py -i video.mp4 -o video_blurred.mp4
 ``
 
 ## TODO
-- [ ] GPU Support
-- [ ] Various Codec Support
+- [ ] Apply Circular Blur to Faces
