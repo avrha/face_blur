@@ -1,11 +1,13 @@
 import cv2
+import numpy as np
 
 
 def blur_mtcnn(source,faces):
   for i in range(len(faces)):
+    # get dimensions for detect face 
     x1, y1, width, height = faces[i]['box']
     x2, y2 = x1 + width, y1 + height
-    
+
     # create object based on retrieved dimensions
     box = source[y1:y2,x1:x2]
     # blur the object
