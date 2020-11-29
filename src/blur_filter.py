@@ -1,35 +1,14 @@
 import cv2
 
-def blur_dnn(source, face):
-  for idx, f in enumerate(face):
-    # retrieve dimensions on detected face
-    (startX, startY) = f[0], f[1]
-    (endX, endY) = f[2], f[3]
-                                                                          
+
+def blur_mtcnn(source,faces):
+  for i in range(len(faces)):
+    x1, y1, width, height = faces[i]['box']
+    x2, y2 = x1 + width, y1 + height
+    
     # create object based on retrieved dimensions
-    box = source[startY:endY, startX:endX]
-
-    # Sloppy work around to assertion error, work on this later
-    try:
-      box = cv2.GaussianBlur(box,(99,99),30)
-    except:
-      break
-
-
-    # overlay object on frame
-    source[startY:startY + box.shape[0], startX:startX + box.shape[1]] = box 
-
-def blur_cnn(source,faces):
-  for faceRect in faces:
-    # retrieve dimensions on detected face
-    rect = faceRect.rect
-    x = rect.left()
-    y = rect.top()
-    w = rect.right() - x
-    h = rect.bottom() - y
-
-    # create object based on retrieved dimensions
-    box = source[y:y+h, x:x+w]
+    box = source[y1:y2,x1:x2]
+    # blur the object
     box = cv2.GaussianBlur(box,(99,99),30)
     # overlay object on frame
-    source[y:y+box.shape[0], x:x+box.shape[1]] = box
+    source[y1:y1+box.shape[0],x1:x1+box.shape[1]] = box
