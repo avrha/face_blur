@@ -18,18 +18,18 @@ def image(arg1,arg2):
   faces = detector.detect_faces(img)
   
   # Blur faces
-  blurred_image = blur_mtcnn(img,faces)
+  blur_mtcnn(img,faces)
 
   # Display and write out image with blur
-  blurred_resized = cv2.resize(blurred_image,(0,0),fx=0.50,fy=0.50)
-  cv2.imshow("Image Output",blurred_resized)
-  cv2.imwrite(arg2,blurred_image)
+  cv2.imshow("Image Output",img)
+  cv2.imwrite(arg2,img)
 
   cv2.waitKey(0)
   cv2.destroyAllWindows()
 
 
-def video(arg1,arg2):
+#Used for processing vidoes
+def video(arg1,arg2,arg3):
   # Capture video source
   cap = cv2.VideoCapture(arg1)
 
@@ -57,20 +57,24 @@ def video(arg1,arg2):
       print("Error with frame")
       exit()
     
-    # Face Detection
-    detector = MTCNN()
-    faces = detector.detect_faces(frame)
-    
-    # Blur faces in frame 
-    blurred_frame = blur_mtcnn(frame,faces)
+    #skip frame
+    if cap.get(1) % arg3 == 0:
+      # Face Detection
+      detector = MTCNN()
+      faces = detector.detect_faces(frame)
+      
+      # Blur faces in frame 
+      blurred_frame = blur_mtcnn(frame,faces)
 
-    # Show and write out frame
-    cv2.imshow("Video Output", blurred_frame)
-    out.write(blurred_frame)
+      # Show and write out frame
+      cv2.imshow("Video Output", frame)
+      out.write(frame)
 
-    # Press q to exit video
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+      # Press q to exit video
+      if cv2.waitKey(1) & 0xFF == ord('q'):
+          break
+    else:
+      continue
 
   cap.release()
   out.release()
