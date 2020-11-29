@@ -3,12 +3,10 @@ Detects and blurs any faces in a given image or video.
 <img width=800px src="https://github.com/avrha/face_blur/blob/main/examples/img_example.jpg/">
 <img width=320px height=180 src= "https://github.com/avrha/face_blur/blob/main/examples/vid_example.gif/">
 ## Dependencies 
-- python3
-- openCV
-- dlib
-- numpy
-- cvlib
-- tensorflow
+- Python3
+- OpenCV
+- Tensorflow
+- MTCNN
 
 ### Install Dependencies
 ```
