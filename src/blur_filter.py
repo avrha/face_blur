@@ -9,7 +9,12 @@ def blur_mtcnn(source,faces):
 
     # create object based on retrieved dimensions
     box = source[y1:y2,x1:x2]
+
     # blur the object
-    box = cv2.GaussianBlur(box,(99,99),30)
+    try:
+      box = cv2.GaussianBlur(box,(99,99),30)
+    except:
+      break
+
     # overlay object on frame
     source[y1:y1+box.shape[0],x1:x1+box.shape[1]] = box
