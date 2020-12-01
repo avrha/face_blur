@@ -4,7 +4,7 @@ from src.blur_filter import blur_mtcnn
 
 
 # Used for processing images
-def image(arg1,arg2):
+def image(arg1,arg2,arg3):
   # Read in image
   img = cv2.imread(arg1,1)
 
@@ -12,6 +12,9 @@ def image(arg1,arg2):
   if img is None:
     print("Could not open file")
     exit()
+  
+  # Resize image
+  img = cv2.resize(img,(0,0),fx=arg3,fy=arg3)
 
   # Face detection
   detector = MTCNN()
@@ -56,7 +59,7 @@ def video(arg1,arg2,arg3):
     if frame is None:
       print("Error with frame")
       exit()
-    
+
     #skip frame
     if cap.get(1) % arg3 == 0:
       # Face Detection
