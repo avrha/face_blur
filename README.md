@@ -13,27 +13,27 @@ Detects and blurs any faces in a given image or video.
 pip3 install -r ./requirements.txt
 ```
 
-## Instructions
-face_blur is a python script that takes in two arguments upon execution. First is the input file you wish to blur (flagged as  -i) and the second is the output file you wish to write to (flagged as -o). face_blur supports all video and file formats for processing. 
+##  Instructions
+face_blur utilizes predefined arguments upon execution. Input (-i) and output (-o) are both required. Resize image (-r) and skip frame  (-s) are both optional. All video and image formats are supported. 
 
-###  Blurring an Image 
+### Blur an Image
+Use the input argument (-i) to specify the image to blur. Then use the output argument (-o) to specify a write to file. 
+  
 ``
 python3 face_blur.py -i image.jpg -o image_blurred.jpg
 ``
 ### Resize an Image
 The input image can be resized to improve performance during processing. Use the resize argument (flagged as -r) to shrink the image. The argument value is the percent change in size. 
-``
-# Resize image by 25 percent
-python3 face_blur.py -i image.jpg -o image_resized_blurred.jpg -r 25
-``
 
-### Blurring an Video 
-``
-python3 face_blur.py -i video.mp4 -o video_blurred.mp4
-``
+`python3 face_blur.py -i image.jpg -o image_resized_blurred.jpg -r 25`
+
+### Blur a Video 
+Use the input argument (-i) to specify the video to blur. Then use the output argument (-o) to specify a write to file. 
+
+`python3 face_blur.py -i video.mp4 -o video_blurred.mp4`
+
+
 ### Skip Frames
 Frames can be skipped to improve performance during processing. Use the skip frame argument (flagged as -s) to reduce the number of frames for processing. The argument value indicates how frequently to skip a frame.
-``
-# Skip frame every 10nth time
-python3 face_blur.py -i video.mp4 -o video_skipped_blurred.mp4 -s 10
-``
+
+`python3 face_blur.py -i video.mp4 -o video_skipped_blurred.mp4 -s 10`
